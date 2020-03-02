@@ -1,3 +1,3 @@
 # T-DEV-810
 
-Image recognition
+AI: Image recognition
