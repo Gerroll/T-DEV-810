@@ -2,7 +2,6 @@
 
 AI: Image recognition
 
-
 ## Using Virtualenv
 ### Install virtual env
 `pip install virtualenv`
