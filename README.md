@@ -10,19 +10,19 @@ AI: Image recognition
 `cd ./T-DEV-810/`
 
 ### Init virtualenv
-`virtualenv -p python3.8 venv3.8`
+`virtualenv -p python3.7 venv3.7`
 
 ### Use existing virtualenv
-`source venv3.8/bin/activate`
+`source venv3.7/bin/activate`
 
 ### Install package in virtualenv
 `pip install <module>`
 
 ### Save dependencies
-`pip freeze > requirements.txt`
+`pip freeze > requirements3.7.txt`
 
 ### Load dependencies
-`pip install -r requirements.txt`
+`pip install -r requirements3.7.txt`
 
 ### Stop using virtualenv
 `deactivate`
