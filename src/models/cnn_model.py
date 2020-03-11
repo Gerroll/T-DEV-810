@@ -5,32 +5,24 @@ import tensorflow as tf
 import datetime
 
 
-class MyCustomModel:
+class CnnModel:
     def __init__(self, modelType=type file=fileNameNeural, shape=inputShape, class=classNumber, active_log=True):
         self.fileNameNeural = fileNameNeural
         self.inputShape = inputShape
         self.classNumber = classNumber
         self.active_log = active_log
-	if type == "simple":
-        	# set simple model
-        	self.model = keras.Sequential([
-            	keras.layers.Flatten(input_shape=self.inputShape),
-            	keras.layers.Dense(128, activation='relu'),
-            	keras.layers.Dense(self.classNumber)
-        	])
-	elif type == "cnn":
-        	# set cnn model
-        	# result: Test accuracy ~ 0.65, Loss ~ 3.6
-        	self.model = keras.Sequential([
-            	keras.layers.Conv2D(32, 3, activation='relu', input_shape=self.inputShape),
-            	keras.layers.MaxPooling2D(2),
-            	keras.layers.Conv2D(64, 3, activation='relu'),
-            	keras.layers.MaxPooling2D(2),
-            	keras.layers.Conv2D(64, 3, activation='relu'),
-            	keras.layers.Flatten(),
-            	keras.layers.Dense(64, activation='relu'),
-            	keras.layers.Dense(self.classNumber)
-        	])
+        # set cnn model
+        # result: Test accuracy ~ 0.65, Loss ~ 3.6
+        self.model = keras.Sequential([
+        keras.layers.Conv2D(32, 3, activation='relu', input_shape=self.inputShape),
+        keras.layers.MaxPooling2D(2),
+        keras.layers.Conv2D(64, 3, activation='relu'),
+        keras.layers.MaxPooling2D(2),
+        keras.layers.Conv2D(64, 3, activation='relu'),
+        keras.layers.Flatten(),
+        keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dense(self.classNumber)
+        ])
         # compile model
         self.model.compile(optimizer='adam',
                            loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
