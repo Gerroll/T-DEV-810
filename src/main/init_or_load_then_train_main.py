@@ -12,7 +12,7 @@ if __name__ == "__main__":
     CLASS_NAME = ['NORMAL', 'BACTERIA', 'VIRUS']
 
     # init model
-    model = MyCustomModel(fileName, inputShape, 3, active_log=False)
+    model = CnnModel(fileName, inputShape, 3, active_log=False)
 
     # replace the actual model with an existing one from h5 format file
     # model.load('neural_network')
