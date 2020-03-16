@@ -6,7 +6,7 @@ import datetime
 
 
 class SimpleModel:
-    def __init__(self, modelType=type file=fileNameNeural, shape=inputShape, class=classNumber, active_log=True):
+    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=True):
         self.fileNameNeural = fileNameNeural
         self.inputShape = inputShape
         self.classNumber = classNumber

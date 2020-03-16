@@ -1,6 +1,5 @@
-from custom_model import MyCustomModel
-from load_data import Loader
-from display_prediction import Display
+from loadData import Loader
+from plotPrediction import Display
 
 if __name__ == "__main__":
     # config param

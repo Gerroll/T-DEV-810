@@ -1,5 +1,5 @@
-from custom_model import MyCustomModel
-from load_data import Loader
+from models.cnn_model import CnnModel
+from loadData import Loader
 
 if __name__ == "__main__":
     fileName = 'neural_network'

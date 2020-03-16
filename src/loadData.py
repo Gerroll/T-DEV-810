@@ -1,9 +1,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
+
 import tensorflow as tf
 import pathlib
-from tensorflow.data.experimental import AUTOTUNE
-import IPython.display as display
-from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -63,7 +61,7 @@ class Loader:
         ds = ds.batch(self.BATCH_SIZE)
         # `prefetch` lets the dataset fetch batches in the background while the model
         # is training.
-        ds = ds.prefetch(buffer_size=AUTOTUNE)
+        ds = ds.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
 
         return ds
 
@@ -79,7 +77,7 @@ class Loader:
 
     def load_data(self):
         # Set `num_parallel_calls` so multiple images are loaded/processed in parallel.
-        labeled_ds = self.list_ds.map(self.process_path, num_parallel_calls=AUTOTUNE)
+        labeled_ds = self.list_ds.map(self.process_path, num_parallel_calls=tf.data.experimental.AUTOTUNE)
         train_ds = self.prepare_for_training(labeled_ds, cache=False)
         image_batch, label_batch = next(iter(train_ds))
         print("image batch:", type(image_batch.numpy()))
