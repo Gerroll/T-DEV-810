@@ -3,7 +3,7 @@ from plotPrediction import Display
 
 if __name__ == "__main__":
     # config param
-    DATA_PATH = '/home/maxime/t-dev-810-imageRecognition/bonus/test'
+    DATA_PATH = './resource/data/test'
     BATCH_SIZE = 400
     IMG_HEIGHT = 224
     IMG_WIDTH = 224

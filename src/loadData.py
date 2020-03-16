@@ -16,7 +16,6 @@ class Loader:
         # load data dir
         self.data_dir = pathlib.Path(pathToData)
         # display class name
-        #self.CLASS_NAMES = np.array([item.name for item in self.data_dir.glob('*') if item.name != '.DS_Store'])
         self.CLASS_NAMES = className
         self.list_ds = tf.data.Dataset.list_files(str(self.data_dir/'*/*'))
 

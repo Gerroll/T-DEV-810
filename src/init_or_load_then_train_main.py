@@ -4,8 +4,8 @@ from loadData import Loader
 if __name__ == "__main__":
     fileName = 'neural_network'
     inputShape = (224, 224, 1)
-    DATA_PATH_TRAIN = '/home/maxime/t-dev-810-imageRecognition/bonus/train'
-    DATA_PATH_TEST = '/home/maxime/t-dev-810-imageRecognition/bonus/test'
+    DATA_PATH_TRAIN = './resource/data/train'
+    DATA_PATH_TEST = './resource/data/test'
     BATCH_SIZE = 400
     IMG_HEIGHT = 224
     IMG_WIDTH = 224
