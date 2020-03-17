@@ -6,7 +6,7 @@ import datetime
 
 
 class SimpleModel:
-    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=True):
+    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=False):
         self.fileNameNeural = fileNameNeural
         self.inputShape = inputShape
         self.classNumber = classNumber
@@ -21,15 +21,14 @@ class SimpleModel:
         self.model.compile(optimizer='adam',
                            loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                            metrics=['accuracy'])
-
         if self.active_log:
             # complete logs
-            log_dir = "logs/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-            self.tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+            self.log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+            self.tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=self.log_dir, histogram_freq=1)
 
     def train(self, train_data, train_label, test_data, test_label, epochNumber):
+        # train model
         if self.active_log:
-            # train model
             self.model.fit(train_data, train_label, validation_data=(test_data, test_label), epochs=epochNumber, callbacks=[self.tensorboard_callback])
         else:
             self.model.fit(train_data, train_label, validation_data=(test_data, test_label), epochs=epochNumber)
