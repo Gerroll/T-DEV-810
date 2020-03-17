@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # load train data
     loader_train = Loader(DATA_PATH_TRAIN, BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, CLASS_NAME)
     train_data, train_label = loader_train.load_data()
-    train_data = train_data.reshape((400, 224, 224, 1))
+    train_data = train_data.reshape((BATCH_SIZE, IMG_WIDTH, IMG_HEIGHT, 1))
 
     # load test data
     loader_test = Loader(DATA_PATH_TEST, BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, CLASS_NAME)
