@@ -28,6 +28,6 @@ if __name__ == "__main__":
     test_data = test_data.reshape((400, 224, 224, 1))
 
     # train model then evaluate with test data
-    model.train(train_data, train_label, test_data, test_label, 1)
+    model.train(train_data, train_label, test_data, test_label, EPOCHS)
     # save model in a .h5 file
     model.save()
