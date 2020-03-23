@@ -44,10 +44,6 @@ jupyter only works with python2.7
 `deactivate`
 
 ## Tensorboard
-### Clear any logs from previous runs
-`cd ./T-DEV-810/src/`
-`rm -rf ./logs/*`
-
 ### Activate logs
 Edit init_or_load_then_train_main.py :
     CnnModel(filename, inputShape, 3, False) => CnnModel(filename, inputShape, 3, True)
