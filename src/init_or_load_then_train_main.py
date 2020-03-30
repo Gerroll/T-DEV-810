@@ -9,11 +9,11 @@ if __name__ == "__main__":
     IMG_HEIGHT = 224
     IMG_WIDTH = 224
     inputShape = (IMG_WIDTH, IMG_HEIGHT, 1)
-    EPOCHS = 10
+    EPOCHS = 50
     CLASS_NAME = ['NORMAL', 'BACTERIA', 'VIRUS']
 
     # init model
-    model = CnnModel(fileName, inputShape, 3, False)
+    model = CnnModel(fileName, inputShape, 3, True)
 
     # replace the actual model with an existing one from h5 format file
     # model.load('neural_network')
