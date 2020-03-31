@@ -6,7 +6,7 @@ import datetime
 
 
 class CnnModel:
-    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=False):
+    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=False, log_folder='fit'):
         self.fileNameNeural = fileNameNeural
         self.inputShape = inputShape
         self.classNumber = classNumber
@@ -21,16 +21,16 @@ class CnnModel:
         keras.layers.Dropout(0.2),
         keras.layers.Conv2D(64, 3, activation='relu'),
         keras.layers.Flatten(),
-        keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dense(64, activation='relu'), #sigmoid
         keras.layers.Dense(self.classNumber)
         ])
         # compile model
-        self.model.compile(optimizer='adam',
+        self.model.compile(optimizer='RMSprop', #RMSprop ?
                            loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                            metrics=['accuracy'])
         if self.active_log:
             # complete logs
-            self.log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+            self.log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + log_folder
             self.tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=self.log_dir, histogram_freq=1)
 
     def train(self, train_data, train_label, test_data, test_label, epochNumber):
