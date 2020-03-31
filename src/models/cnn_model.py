@@ -2,7 +2,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from tensorflow import keras
 
 import tensorflow as tf
-import datetime
 
 
 class CnnModel:
@@ -22,15 +21,15 @@ class CnnModel:
         keras.layers.Conv2D(64, 3, activation='relu'),
         keras.layers.Flatten(),
         keras.layers.Dense(64, activation='relu'), #sigmoid
-        keras.layers.Dense(self.classNumber)
+        keras.layers.Dense(self.classNumber, activation='softmax')
         ])
         # compile model
-        self.model.compile(optimizer='RMSprop', #RMSprop ?
+        self.model.compile(optimizer='adam', #RMSprop ?
                            loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                            metrics=['accuracy'])
         if self.active_log:
             # complete logs
-            self.log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + log_folder
+            self.log_dir = "logs/fit/" + log_folder
             self.tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=self.log_dir, histogram_freq=1)
 
     def train(self, train_data, train_label, test_data, test_label, epochNumber):

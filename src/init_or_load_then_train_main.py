@@ -1,7 +1,14 @@
 from models.cnn_model import CnnModel
 from loadData import Loader
 
+import sys
+import datetime
+
 if __name__ == "__main__":
+    if len(sys.argv) >= 2:
+        LOG_DIR = sys.argv[1]
+    else:
+        LOG_DIR = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     fileName = 'neural_network'
     DATA_PATH_TRAIN = './resource/data/train'
     DATA_PATH_TEST = './resource/data/test'
@@ -13,7 +20,7 @@ if __name__ == "__main__":
     CLASS_NAME = ['NORMAL', 'BACTERIA', 'VIRUS']
 
     # init model
-    model = CnnModel(fileName, inputShape, 3, True)
+    model = CnnModel(fileName, inputShape, 3, True, LOG_DIR)
 
     # replace the actual model with an existing one from h5 format file
     # model.load('neural_network')
