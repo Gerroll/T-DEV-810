@@ -5,7 +5,7 @@ import tensorflow as tf
 
 
 class CnnModel:
-    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=False, log_folder='fit'):
+    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=False, log_folder=datetime.datetime.now().strftime("%Y%m%d-%H%M%S")):
         self.fileNameNeural = fileNameNeural
         self.inputShape = inputShape
         self.classNumber = classNumber
