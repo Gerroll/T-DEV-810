@@ -2,6 +2,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from tensorflow import keras
 
 import tensorflow as tf
+import datetime
 
 
 class CnnModel:
@@ -14,17 +15,17 @@ class CnnModel:
         self.model = keras.Sequential([
         keras.layers.Conv2D(32, 3, activation='relu', input_shape=self.inputShape),
         keras.layers.MaxPooling2D(2),
-        keras.layers.Dropout(0.2),
+        keras.layers.Dropout(0.6),
         keras.layers.Conv2D(64, 3, activation='relu'),
         keras.layers.MaxPooling2D(2),
-        keras.layers.Dropout(0.2),
+        keras.layers.Dropout(0.6),
         keras.layers.Conv2D(64, 3, activation='relu'),
         keras.layers.Flatten(),
-        keras.layers.Dense(64, activation='relu'), #sigmoid
-        keras.layers.Dense(self.classNumber, activation='softmax')
+        keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dense(self.classNumber)
         ])
         # compile model
-        self.model.compile(optimizer='adam', #RMSprop ?
+        self.model.compile(optimizer='RMSprop',
                            loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                            metrics=['accuracy'])
         if self.active_log:
