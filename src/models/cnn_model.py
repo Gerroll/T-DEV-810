@@ -6,7 +6,7 @@ import datetime
 
 
 class CnnModel:
-    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=False, log_folder='fit'):
+    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=False, log_folder=datetime.datetime.now().strftime("%Y%m%d-%H%M%S")):
         self.fileNameNeural = fileNameNeural
         self.inputShape = inputShape
         self.classNumber = classNumber
@@ -30,7 +30,7 @@ class CnnModel:
                            metrics=['accuracy'])
         if self.active_log:
             # complete logs
-            self.log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + log_folder
+            self.log_dir = "logs/fit/" + log_folder
             self.tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=self.log_dir, histogram_freq=1)
 
     def train(self, train_data, train_label, test_data, test_label, epochNumber):
