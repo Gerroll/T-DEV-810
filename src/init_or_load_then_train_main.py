@@ -1,5 +1,6 @@
 from models.cnn_model import CnnModel
 from loadData import Loader
+import numpy as np
 
 import sys
 
@@ -28,11 +29,15 @@ if __name__ == "__main__":
     train_data, train_label = loader_train.load_data(data_augmentation=True)
     train_data = train_data.reshape((BATCH_SIZE, IMG_WIDTH, IMG_HEIGHT, 1))
 
+
     # load test data
     loader_test = Loader(DATA_PATH_TEST, BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, CLASS_NAME)
     test_data, test_label = loader_test.load_data()
     test_data = test_data.reshape((BATCH_SIZE, IMG_WIDTH, IMG_HEIGHT, 1))
 
+
+    stesp_per_epoch = int(np.ceil(loader_train.image_count / BATCH_SIZE))
+    validation_steps = int(np.ceil(loader_train.image_count / BATCH_SIZE))
     # train model then evaluate with test data
     model.train(train_data, train_label, test_data, test_label, EPOCHS)
     # save model in a .h5 file
