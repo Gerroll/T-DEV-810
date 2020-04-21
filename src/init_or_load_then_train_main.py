@@ -24,14 +24,17 @@ if __name__ == "__main__":
     # model.load('neural_network')
 
     # load train data
-    loader_train = Loader(DATA_PATH_TRAIN, BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, CLASS_NAME)
-    train_data, train_label = loader_train.load_data(data_augmentation=True)
-    train_data = train_data.reshape((BATCH_SIZE, IMG_WIDTH, IMG_HEIGHT, 1))
+    loader_train = Loader('./resource/data/combined', BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, CLASS_NAME)
+    (train_data, train_label), (test_data, test_label) = loader_train.load_both_data()
 
-    # load test data
-    loader_test = Loader(DATA_PATH_TEST, BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, CLASS_NAME)
-    test_data, test_label = loader_test.load_data()
+    #train_data, train_label = loader_train.load_data(data_augmentation=True)
+    train_data = train_data.reshape((BATCH_SIZE, IMG_WIDTH, IMG_HEIGHT, 1))
     test_data = test_data.reshape((BATCH_SIZE, IMG_WIDTH, IMG_HEIGHT, 1))
+
+    # # load test data
+    # loader_test = Loader(DATA_PATH_TEST, BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, CLASS_NAME)
+    # test_data, test_label = loader_test.load_data()
+    # test_data = test_data.reshape((BATCH_SIZE, IMG_WIDTH, IMG_HEIGHT, 1))
 
     # train model then evaluate with test data
     model.train(train_data, train_label, test_data, test_label, EPOCHS)

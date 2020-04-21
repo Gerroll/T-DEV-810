@@ -100,3 +100,30 @@ class Loader:
         show_batch(image_batch.numpy(), label_batch.numpy())
         """
         return image_batch.numpy(), self.resize_label(label_batch.numpy())
+
+    def load_both_data(self):
+        # Set `num_parallel_calls` so multiple images are loaded/processed in parallel.
+
+        DATASET_SIZE = 814
+
+        train_size = int(0.7 * DATASET_SIZE)
+        test_size = int(0.3 * DATASET_SIZE)
+
+        labeled_ds = self.list_ds.map(self.process_path, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+
+        train_ds = labeled_ds.take(train_size)
+        test_ds = labeled_ds.skip(train_size)
+        test_ds = test_ds.take(test_size)
+
+        train_ds = self.prepare_for_training(train_ds, cache=False)
+        test_ds = self.prepare_for_training(test_ds, cache=False)
+        image_batch, label_batch = next(iter(train_ds))
+        image_batch_test, label_batch_test = next(iter(test_ds))
+        print("image batch:", type(image_batch.numpy()))
+        print("label batch:", type(label_batch.numpy()))
+
+        """
+        # See data as ndarray
+        show_batch(image_batch.numpy(), label_batch.numpy())
+        """
+        return (image_batch.numpy(), self.resize_label(label_batch.numpy())), (image_batch_test.numpy(), self.resize_label(label_batch_test.numpy()))
