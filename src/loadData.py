@@ -106,8 +106,8 @@ class Loader:
 
         DATASET_SIZE = 814
 
-        train_size = int(0.7 * DATASET_SIZE)
-        test_size = int(0.3 * DATASET_SIZE)
+        train_size = int(0.85 * DATASET_SIZE)
+        test_size = int(0.15 * DATASET_SIZE)
 
         labeled_ds = self.list_ds.map(self.process_path, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
