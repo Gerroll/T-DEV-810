@@ -96,7 +96,6 @@ tensorboard-plugin-wit==1.6.0.post2
 tensorflow==2.0.0b1
 tensorflow-estimator==2.1.0
 tensorflow-datasets==2.1.0
-tensorflow-examples===f812d2c36469823c8784e387f690f43ad9d17683-
 tensorflow-hub==0.7.0
 tensorflow-metadata==0.21.1
 termcolor==1.1.0
