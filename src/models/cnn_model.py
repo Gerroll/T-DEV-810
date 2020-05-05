@@ -6,7 +6,7 @@ import datetime
 
 
 class CnnModel:
-    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=False):
+    def __init__(self, fileNameNeural, inputShape, classNumber, active_log=False, log_folder=datetime.datetime.now().strftime("%Y%m%d-%H%M%S")):
         self.fileNameNeural = fileNameNeural
         self.inputShape = inputShape
         self.classNumber = classNumber
@@ -15,30 +15,30 @@ class CnnModel:
         self.model = keras.Sequential([
         keras.layers.Conv2D(32, 3, activation='relu', input_shape=self.inputShape),
         keras.layers.MaxPooling2D(2),
-        keras.layers.Dropout(0.2),
+        keras.layers.Dropout(0.6),
         keras.layers.Conv2D(64, 3, activation='relu'),
         keras.layers.MaxPooling2D(2),
-        keras.layers.Dropout(0.2),
+        keras.layers.Dropout(0.6),
         keras.layers.Conv2D(64, 3, activation='relu'),
         keras.layers.Flatten(),
         keras.layers.Dense(64, activation='relu'),
         keras.layers.Dense(self.classNumber)
         ])
         # compile model
-        self.model.compile(optimizer='adam',
+        self.model.compile(optimizer='RMSprop',
                            loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                            metrics=['accuracy'])
         if self.active_log:
             # complete logs
-            self.log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+            self.log_dir = "logs/fit/" + log_folder
             self.tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=self.log_dir, histogram_freq=1)
 
     def train(self, train_data, train_label, test_data, test_label, epochNumber):
         # train model
         if self.active_log:
-            self.model.fit(train_data, train_label, validation_data=(test_data, test_label), epochs=epochNumber, callbacks=[self.tensorboard_callback])
+            self.model.fit(train_data, train_label, validation_data=(test_data, test_label), epochs=epochNumber, steps_per_epoch=len(train_data) , callbacks=[self.tensorboard_callback])
         else:
-            self.model.fit(train_data, train_label, validation_data=(test_data, test_label), epochs=epochNumber)
+            self.model.fit(train_data, train_label, validation_data=(test_data, test_label), steps_per_epoch=len(train_data), epochs=epochNumber)
 
     def load(self, fileName):
         # load model

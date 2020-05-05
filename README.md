@@ -55,7 +55,7 @@ Edit init_or_load_then_train_main.py :
     CnnModel(filename, inputShape, 3, False) => CnnModel(filename, inputShape, 3, True)
 
 ### Train with activate logs
-`python init_or_load_then_train_main.py`
+`python init_or_load_then_train_main.py ${model_log_folder}`
 
 ### Launch tensorboard server
 `tensorboard --logdir logs/fit` : default:: /localhost:6006/
