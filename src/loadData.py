@@ -101,13 +101,10 @@ class Loader:
         """
         return image_batch.numpy(), self.resize_label(label_batch.numpy())
 
-    def load_both_data(self):
+    def load_both_data(self, train_size, test_size, batch_size):
         # Set `num_parallel_calls` so multiple images are loaded/processed in parallel.
 
-        DATASET_SIZE = 814
-
-        train_size = int(0.85 * DATASET_SIZE)
-        test_size = int(0.15 * DATASET_SIZE)
+        self.BATCH_SIZE = batch_size
 
         labeled_ds = self.list_ds.map(self.process_path, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
