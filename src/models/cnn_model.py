@@ -36,9 +36,9 @@ class CnnModel:
     def train(self, train_data, train_label, test_data, test_label, epochNumber):
         # train model
         if self.active_log:
-            self.model.fit(train_data, train_label, validation_data=(test_data, test_label), epochs=epochNumber, callbacks=[self.tensorboard_callback])
+            self.model.fit(train_data, train_label, validation_data=(test_data, test_label), epochs=epochNumber, steps_per_epoch=len(train_data) , callbacks=[self.tensorboard_callback])
         else:
-            self.model.fit(train_data, train_label, validation_data=(test_data, test_label), epochs=epochNumber)
+            self.model.fit(train_data, train_label, validation_data=(test_data, test_label), steps_per_epoch=len(train_data), epochs=epochNumber)
 
     def load(self, fileName):
         # load model

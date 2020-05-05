@@ -132,3 +132,5 @@ venv2.7/
 venv3.7/
 .idea/
 .vscode/
+/venv3.6/
+/src/.ipynb_checkpoints/
