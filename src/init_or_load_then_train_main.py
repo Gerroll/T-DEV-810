@@ -25,12 +25,21 @@ if __name__ == "__main__":
 
     # load train data
     loader_train = Loader(DATA_PATH_TRAIN, BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, CLASS_NAME)
-    train_data, train_label = loader_train.load_data(data_augmentation=True)
-    train_data = train_data.reshape((BATCH_SIZE, IMG_WIDTH, IMG_HEIGHT, 1))
+    train_data, train_label = loader_train.load_data()
 
     # load test data
     loader_test = Loader(DATA_PATH_TEST, BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, CLASS_NAME)
     test_data, test_label = loader_test.load_data()
+
+    # # load train data with data balancing
+    # DATASET_SIZE = 814
+    # TRAIN_SIZE = int(0.70 * DATASET_SIZE)
+    # TEST_SIZE = int(0.30 * DATASET_SIZE)
+    # BATCH_SIZE = TRAIN_SIZE if TRAIN_SIZE > TEST_SIZE else TEST_SIZE
+    # loader_train = Loader('./resource/data/combined', BATCH_SIZE, IMG_HEIGHT, IMG_WIDTH, CLASS_NAME)
+    # (train_data, train_label), (test_data, test_label) = loader_train.load_both_data(TRAIN_SIZE, TEST_SIZE, BATCH_SIZE)
+
+    train_data = train_data.reshape((BATCH_SIZE, IMG_WIDTH, IMG_HEIGHT, 1))
     test_data = test_data.reshape((BATCH_SIZE, IMG_WIDTH, IMG_HEIGHT, 1))
 
     # train model then evaluate with test data
